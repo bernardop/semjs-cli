@@ -3,6 +3,7 @@ const program = require("commander");
 const chalk = require("chalk");
 const request = require("request-promise");
 const ora = require("ora");
+const imgcat = require("imgcat");
 
 const config = require("./config.js");
 
@@ -29,14 +30,33 @@ const options = {
 const spinner = ora(`Searching photos of ${program.query}`).start();
 request(options)
     .then(data => {
-        spinner.succeed("Search successful");
-        console.log();
-        data.results.forEach(result => {
-            console.log("id: ", result.id);
-            console.log("photo:", result.links.html);
+        const lastResultIndex = data.results.length - 1;
+        spinner.text = "Fetching photo thumbnails";
+        Promise.all(
+            data.results.map(result => {
+                return new Promise(resolve => {
+                    imgcat(result.urls.thumb).then(thumbnail => {
+                        resolve({
+                            id: result.id,
+                            img: thumbnail,
+                            url: result.links.html
+                        });
+                    });
+                });
+            })
+        ).then(images => {
+            spinner.succeed("Done!");
             console.log();
+            images.forEach(image => {
+                console.log(image.img);
+                console.log(`ID: ${image.id}`);
+                console.log(`Photo URL: ${image.url}`);
+                console.log();
+            });
         });
     })
     .catch(error => {
+        spinner.fail("Error!");
+        console.log();
         console.log(chalk.red("There was a problem", error));
     });

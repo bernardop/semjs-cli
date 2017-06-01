@@ -68,5 +68,7 @@ requestPromise(options)
         );
     })
     .catch(error => {
+        spinner.fail("Error!");
+        console.log();
         console.log(chalk.red("There was a problem", error));
     });
