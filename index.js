@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const program = require("commander");
 const pkg = require("./package.json");
 
-figlet("UNSPRAY", (err, data) => {
+figlet("Unspray", { font: "slant" }, (err, data) => {
     console.log(chalk.yellow(data));
 
     program

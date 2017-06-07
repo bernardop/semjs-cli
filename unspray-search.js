@@ -9,9 +9,10 @@ const config = require("./config.js");
 
 program
     .option("-q, --query <query>", "Search query")
+    .option("-p, --page [page]", "Page number")
     .option(
-        "-m, --max-results [max]",
-        "Maximum number of results",
+        "-r, --results-per-page [resultsPerPage]",
+        "Number of results per page",
         parseInt,
         10
     )
@@ -22,7 +23,8 @@ const options = {
     qs: {
         client_id: config.applicationID,
         query: program.query,
-        per_page: program.maxResults
+        page: program.page ? program.page : "1",
+        per_page: program.resultsPerPage
     },
     json: true
 };
