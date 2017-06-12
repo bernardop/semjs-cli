@@ -47,7 +47,15 @@ request(options)
                 });
             })
         ).then(images => {
-            spinner.succeed("Done!");
+            const resultsLowRange =
+                (parseInt(program.page || "1") - 1) * program.resultsPerPage +
+                1;
+            spinner.succeed(
+                `Done! Showing results ${resultsLowRange}-${resultsLowRange +
+                    program.resultsPerPage -
+                    1} out of ${data.total}`
+            );
+            console.log();
             console.log();
             images.forEach(image => {
                 console.log(image.img);
