@@ -7,6 +7,16 @@ const imgcat = require("imgcat");
 
 const config = require("./config.js");
 
+if (config.errorCode) {
+    console.log(chalk.red("No .unsprayrc file found in your home directory"));
+    console.log(
+        chalk.red(
+            "Please refer to https://github.com/bernardop/unspray/blob/master/README.md"
+        )
+    );
+    process.exit(1);
+}
+
 program
     .option("-q, --query <query>", "Search query")
     .option("-p, --page [page]", "Page number")

@@ -17,6 +17,16 @@ function download(uri, filename, callback) {
     request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
 }
 
+if (config.errorCode) {
+    console.log(chalk.red("No .unsprayrc file found in your home directory"));
+    console.log(
+        chalk.red(
+            "Please refer to https://github.com/bernardop/unspray/blob/master/README.md"
+        )
+    );
+    process.exit(1);
+}
+
 program
     .option("-i, --photo-id [photo-id]", "Photo ID")
     .option(
@@ -52,7 +62,10 @@ requestPromise(options)
             path.join(program.directory, `${data.id}.jpg`),
             function() {
                 spinner.succeed(
-                    `Photo successfully saved in ${path.join(program.directory, `${data.id}.jpg`)}`
+                    `Photo successfully saved in ${path.join(
+                        program.directory,
+                        `${data.id}.jpg`
+                    )}`
                 );
             }
         );
