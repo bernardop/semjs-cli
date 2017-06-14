@@ -1,7 +1,7 @@
 {
   "name": "unspray",
   "version": "1.0.0",
-  "description": "An example CLI for SEM.js",
+  "description": "A CLI for interacting with Unsplash.com",
   "main": "index.js",
   "repository": "https://github.com/bernardop/unspray.git",
   "author": "Bernardo Pacheco",
