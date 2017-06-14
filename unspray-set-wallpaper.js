@@ -65,12 +65,17 @@ requestPromise(options)
         download(
             data.urls[program.quality],
             path.join(program.directory, `${data.id}.jpg`),
-            function() {
+            () => {
                 spinner.text = "Setting photo as wallpaper";
                 wallpaper
                     .set(path.join(program.directory, `${data.id}.jpg`))
                     .then(() => {
                         spinner.succeed("Wallpaper set successfully!");
+                        console.log();
+                        console.log(`ID: ${data.id}`);
+                        console.log(`Photo URL: ${data.links.html}`);
+                        console.log(`Author: ${data.user.name}`);
+                        console.log(`Author Profile: ${data.user.links.html}`);
                     });
             }
         );

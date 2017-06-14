@@ -46,20 +46,21 @@ request(options)
         spinner.text = "Fetching photo thumbnails";
         Promise.all(
             data.results.map(result => {
+                let photo = {
+                    id: result.id,
+                    url: result.links.html,
+                    authorName: result.user.name,
+                    authorUrl: result.user.links.html
+                };
+
                 return new Promise(resolve => {
                     imgcat(result.urls.thumb)
                         .then(thumbnail => {
-                            resolve({
-                                id: result.id,
-                                img: thumbnail,
-                                url: result.links.html
-                            });
+                            photo.img = thumbnail;
+                            resolve(photo);
                         })
                         .catch(e => {
-                            resolve({
-                                id: result.id,
-                                url: result.links.html
-                            });
+                            resolve(photo);
                         });
                 });
             })
@@ -80,6 +81,8 @@ request(options)
                 image.img && console.log(image.img);
                 console.log(`ID: ${image.id}`);
                 console.log(`Photo URL: ${image.url}`);
+                console.log(`Author: ${image.authorName}`);
+                console.log(`Author Profile: ${image.authorUrl}`);
                 console.log();
             });
         });

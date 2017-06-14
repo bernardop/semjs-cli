@@ -60,13 +60,18 @@ requestPromise(options)
         download(
             data.urls[program.quality],
             path.join(program.directory, `${data.id}.jpg`),
-            function() {
+            () => {
                 spinner.succeed(
                     `Photo successfully saved in ${path.join(
                         program.directory,
                         `${data.id}.jpg`
                     )}`
                 );
+                console.log();
+                console.log(`ID: ${data.id}`);
+                console.log(`Photo URL: ${data.links.html}`);
+                console.log(`Author: ${data.user.name}`);
+                console.log(`Author Profile: ${data.user.links.html}`);
             }
         );
     })
