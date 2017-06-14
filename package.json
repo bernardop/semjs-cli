@@ -1,6 +1,6 @@
 {
   "name": "unspray",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI for interacting with Unsplash.com",
   "main": "index.js",
   "repository": "https://github.com/bernardop/unspray.git",
