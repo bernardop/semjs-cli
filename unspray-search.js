@@ -47,28 +47,37 @@ request(options)
         Promise.all(
             data.results.map(result => {
                 return new Promise(resolve => {
-                    imgcat(result.urls.thumb).then(thumbnail => {
-                        resolve({
-                            id: result.id,
-                            img: thumbnail,
-                            url: result.links.html
+                    imgcat(result.urls.thumb)
+                        .then(thumbnail => {
+                            resolve({
+                                id: result.id,
+                                img: thumbnail,
+                                url: result.links.html
+                            });
+                        })
+                        .catch(e => {
+                            resolve({
+                                id: result.id,
+                                url: result.links.html
+                            });
                         });
-                    });
                 });
             })
         ).then(images => {
-            const resultsLowRange =
+            const resultsLowerRange =
                 (parseInt(program.page || "1") - 1) * program.resultsPerPage +
                 1;
+            const resultsUpperRange = Math.min(
+                resultsLowerRange + program.resultsPerPage - 1,
+                data.total
+            );
             spinner.succeed(
-                `Done! Showing results ${resultsLowRange}-${resultsLowRange +
-                    program.resultsPerPage -
-                    1} out of ${data.total}`
+                `Done! Showing results ${resultsLowerRange}-${resultsUpperRange} out of ${data.total}`
             );
             console.log();
             console.log();
             images.forEach(image => {
-                console.log(image.img);
+                image.img && console.log(image.img);
                 console.log(`ID: ${image.id}`);
                 console.log(`Photo URL: ${image.url}`);
                 console.log();
