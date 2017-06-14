@@ -11,7 +11,7 @@ if (config.errorCode) {
     console.log(chalk.red("No .unsprayrc file found in your home directory"));
     console.log(
         chalk.red(
-            "Please refer to https://github.com/bernardop/unspray/blob/master/README.md"
+            "Please refer to https://github.com/bernardop/unspray#configuration"
         )
     );
     process.exit(1);

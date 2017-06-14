@@ -1,5 +1,5 @@
 # Unspray
-A CLI for interacting with Unsplash.com
+A CLI for interacting with [Unsplash.com](https://unsplash.com)
 
 ## Installation
 ```
