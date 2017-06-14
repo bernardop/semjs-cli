@@ -31,6 +31,9 @@ unspray search -q "search query" -p 1 -r 5
 * `-p` or `--page` - Page number to retrieve (optional; default: 1)
 * `-r` or `--results-per-page` - Number of items per page (optional; default: 10)
 
+_Note: if you use iTerm2 v2.9+ you can see thumbnails of the results right in your terminal!_
+![Search](assets/search.png)
+
 ### Save
 Save a photo to your computer
 ```
